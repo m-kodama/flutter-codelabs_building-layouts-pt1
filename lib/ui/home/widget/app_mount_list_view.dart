@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_codelab_1/ui/detail/page/detail_page.dart';
 import 'package:flutter_codelab_1/ui/home/view_model/mock.dart';
 import 'package:flutter_codelab_1/ui/home/view_model/state/mount_model.dart';
 
@@ -31,36 +32,45 @@ class _MountListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.bottomLeft,
-      padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.all(10),
-      width: 150,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(
-          image: NetworkImage(mount.path),
-          fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => DetailPage(mount: mount),
+          ),
+        );
+      },
+      child: Container(
+        alignment: Alignment.bottomLeft,
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(10),
+        width: 150,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          image: DecorationImage(
+            image: NetworkImage(mount.path),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            mount.name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              mount.name,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Text(
-            mount.location,
-            style: const TextStyle(
-              color: Colors.white,
+            Text(
+              mount.location,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
